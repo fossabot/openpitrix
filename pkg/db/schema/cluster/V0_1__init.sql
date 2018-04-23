@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS cluster (
 	global_uuid          MEDIUMTEXT    NOT NULL,
 	upgrade_status       VARCHAR(50)   NOT NULL,
 	upgrade_time         TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	runtime_id       VARCHAR(50)   NOT NULL,
+	runtime_id           VARCHAR(50)   NOT NULL,
 	vpc_id               VARCHAR(50)   NOT NULL DEFAULT '',
 	INDEX cluster_status_index (status ASC),
 	INDEX cluster_create_time_index (create_time ASC),
@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS cluster_link (
 );
 
 CREATE TABLE IF NOT EXISTS cluster_role (
-	cluster_id    INT          NOT NULL,
+	cluster_id    VARCHAR(50)  NOT NULL,
 	role          VARCHAR(50)  NOT NULL,
 	cpu           INT(11)      NOT NULL,
 	gpu           INT(11)      NOT NULL,
@@ -134,6 +134,7 @@ CREATE TABLE IF NOT EXISTS cluster_role (
 	env           TEXT         NULL,
 	mount_point   VARCHAR(100) NOT NULL DEFAULT '',
 	mount_options VARCHAR(100) NOT NULL DEFAULT '',
+	file_system   VARCHAR(50)  NOT NULL DEFAULT '',
 	PRIMARY KEY (cluster_id, role)
 );
 
