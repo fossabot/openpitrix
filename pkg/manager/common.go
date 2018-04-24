@@ -43,7 +43,7 @@ func getSearchFilter(tableName string, value interface{}, exclude ...string) dbr
 			return nil
 		}
 		return db.Or(ops...)
-	} else {
+	} else if value != nil {
 		logger.Warnf("search_word [%+v] is not string", value)
 	}
 	return nil
