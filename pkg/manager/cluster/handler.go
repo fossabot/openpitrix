@@ -244,6 +244,8 @@ func (p *Server) ModifyCluster(ctx context.Context, req *pb.ModifyClusterRequest
 	}
 
 	attributes := manager.BuildUpdateAttributes(req.Cluster, models.ClusterColumns...)
+	logger.Debugf("ModifyCluster got attributes: [%+v]", attributes)
+	delete(attributes, "cluster_id")
 	_, err = pi.Global().Db.
 		Upsert(models.ClusterTableName).
 		SetMap(attributes).
@@ -256,6 +258,8 @@ func (p *Server) ModifyCluster(ctx context.Context, req *pb.ModifyClusterRequest
 	for _, clusterNode := range req.ClusterNodeSet {
 		nodeId := clusterNode.GetNodeId().GetValue()
 		nodeAttributes := manager.BuildUpdateAttributes(clusterNode, models.ClusterNodeColumns...)
+		delete(nodeAttributes, "cluster_id")
+		delete(nodeAttributes, "node_id")
 		_, err = pi.Global().Db.
 			Upsert(models.ClusterNodeTableName).
 			SetMap(nodeAttributes).
@@ -270,6 +274,8 @@ func (p *Server) ModifyCluster(ctx context.Context, req *pb.ModifyClusterRequest
 	for _, clusterRole := range req.ClusterRoleSet {
 		role := clusterRole.GetRole().GetValue()
 		roleAttributes := manager.BuildUpdateAttributes(clusterRole, models.ClusterRoleColumns...)
+		delete(roleAttributes, "cluster_id")
+		delete(roleAttributes, "role")
 		_, err = pi.Global().Db.
 			Upsert(models.ClusterRoleTableName).
 			SetMap(roleAttributes).
@@ -284,6 +290,8 @@ func (p *Server) ModifyCluster(ctx context.Context, req *pb.ModifyClusterRequest
 	for _, clusterCommon := range req.ClusterCommonSet {
 		role := clusterCommon.GetRole().GetValue()
 		commonAttributes := manager.BuildUpdateAttributes(clusterCommon, models.ClusterCommonColumns...)
+		delete(commonAttributes, "cluster_id")
+		delete(commonAttributes, "role")
 		_, err = pi.Global().Db.
 			Upsert(models.ClusterCommonTableName).
 			SetMap(commonAttributes).
@@ -298,6 +306,8 @@ func (p *Server) ModifyCluster(ctx context.Context, req *pb.ModifyClusterRequest
 	for _, clusterLink := range req.ClusterLinkSet {
 		name := clusterLink.GetName().GetValue()
 		linkAttributes := manager.BuildUpdateAttributes(clusterLink, models.ClusterLinkColumns...)
+		delete(linkAttributes, "cluster_id")
+		delete(linkAttributes, "name")
 		_, err = pi.Global().Db.
 			Upsert(models.ClusterLinkTableName).
 			SetMap(linkAttributes).
@@ -313,6 +323,9 @@ func (p *Server) ModifyCluster(ctx context.Context, req *pb.ModifyClusterRequest
 		role := clusterLoadbalancer.GetRole().GetValue()
 		listenerId := clusterLoadbalancer.GetLoadbalancerListenerId().GetValue()
 		loadbalancerAttributes := manager.BuildUpdateAttributes(clusterLoadbalancer, models.ClusterLoadbalancerColumns...)
+		delete(loadbalancerAttributes, "cluster_id")
+		delete(loadbalancerAttributes, "role")
+		delete(loadbalancerAttributes, "loadbalancer_listener_id")
 		_, err = pi.Global().Db.
 			Upsert(models.ClusterLoadbalancerTableName).
 			SetMap(loadbalancerAttributes).
