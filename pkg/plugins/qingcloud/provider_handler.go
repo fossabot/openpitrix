@@ -9,7 +9,6 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
-	"time"
 
 	qcclient "github.com/yunify/qingcloud-sdk-go/client"
 	qcconfig "github.com/yunify/qingcloud-sdk-go/config"
@@ -547,7 +546,7 @@ func (p *ProviderHandler) WaitRunInstances(task *models.Task) error {
 		return err
 	}
 
-	err = qcclient.WaitJob(jobService, instance.TargetJobId, task.GetTimeout(constants.WaitTaskTimeout)*time.Second,
+	err = qcclient.WaitJob(jobService, instance.TargetJobId, task.GetTimeout(constants.WaitTaskTimeout),
 		constants.WaitTaskInterval)
 	if err != nil {
 		logger.Errorf("Wait %s job [%s] failed: %v", MyProvider, instance.TargetJobId, err)
@@ -617,7 +616,7 @@ func (p *ProviderHandler) WaitInstanceTask(task *models.Task) error {
 		return err
 	}
 
-	err = qcclient.WaitJob(jobService, instance.TargetJobId, task.GetTimeout(constants.WaitTaskTimeout)*time.Second,
+	err = qcclient.WaitJob(jobService, instance.TargetJobId, task.GetTimeout(constants.WaitTaskTimeout),
 		constants.WaitTaskInterval)
 	if err != nil {
 		logger.Errorf("Wait %s job [%s] failed: %v", MyProvider, instance.TargetJobId, err)
@@ -648,7 +647,7 @@ func (p *ProviderHandler) WaitVolumeTask(task *models.Task) error {
 		return err
 	}
 
-	err = qcclient.WaitJob(jobService, volume.TargetJobId, task.GetTimeout(constants.WaitTaskTimeout)*time.Second,
+	err = qcclient.WaitJob(jobService, volume.TargetJobId, task.GetTimeout(constants.WaitTaskTimeout),
 		constants.WaitTaskInterval)
 	if err != nil {
 		logger.Errorf("Wait %s job [%s] failed: %v", MyProvider, volume.TargetJobId, err)

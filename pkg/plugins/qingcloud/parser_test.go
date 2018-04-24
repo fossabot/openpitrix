@@ -6,7 +6,6 @@ package qingcloud
 
 import (
 	"encoding/json"
-	"math/rand"
 	"testing"
 
 	"openpitrix.io/openpitrix/pkg/devkit/app"
@@ -543,7 +542,7 @@ var hbaseClusterNodes = map[string]models.ClusterNode{
 		TransitionStatus: "",
 		GroupId:          1,
 		Owner:            "",
-		GlobalServerId:   rand.Uint32(),
+		GlobalServerId:   0,
 		CustomMetadata:   "",
 		PubKey:           "",
 		HealthStatus:     "",
@@ -564,7 +563,7 @@ var hbaseClusterNodes = map[string]models.ClusterNode{
 		TransitionStatus: "",
 		GroupId:          1,
 		Owner:            "",
-		GlobalServerId:   rand.Uint32(),
+		GlobalServerId:   0,
 		CustomMetadata:   "",
 		PubKey:           "",
 		HealthStatus:     "",
@@ -585,7 +584,7 @@ var hbaseClusterNodes = map[string]models.ClusterNode{
 		TransitionStatus: "",
 		GroupId:          1,
 		Owner:            "",
-		GlobalServerId:   rand.Uint32(),
+		GlobalServerId:   0,
 		CustomMetadata:   "",
 		PubKey:           "",
 		HealthStatus:     "",
@@ -606,7 +605,7 @@ var hbaseClusterNodes = map[string]models.ClusterNode{
 		TransitionStatus: "",
 		GroupId:          2,
 		Owner:            "",
-		GlobalServerId:   rand.Uint32(),
+		GlobalServerId:   0,
 		CustomMetadata:   "",
 		PubKey:           "",
 		HealthStatus:     "",
@@ -627,7 +626,7 @@ var hbaseClusterNodes = map[string]models.ClusterNode{
 		TransitionStatus: "",
 		GroupId:          3,
 		Owner:            "",
-		GlobalServerId:   rand.Uint32(),
+		GlobalServerId:   0,
 		CustomMetadata:   "",
 		PubKey:           "",
 		HealthStatus:     "",

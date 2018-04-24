@@ -127,8 +127,8 @@ func (c *Controller) HandleTask(taskId string, cb func()) error {
 			logger.Errorf("Failed to handle task [%s] to pilot: %+v", task.TaskId, err)
 			return err
 		}
-		err = pilotclient.WaitSubtask(task.TaskId, task.GetTimeout(constants.WaitTaskTimeout)*time.Second,
-			constants.WaitTaskInterval)
+		err = pilotclient.WaitSubtask(
+			task.TaskId, task.GetTimeout(constants.WaitTaskTimeout), constants.WaitTaskInterval)
 		if err != nil {
 			logger.Errorf("Failed to wait task [%s]: %+v", task.TaskId, err)
 			return err
@@ -145,8 +145,8 @@ func (c *Controller) HandleTask(taskId string, cb func()) error {
 				task.TaskId, task.Target, err)
 			return err
 		}
-		err = providerInterface.WaitSubtask(task, task.GetTimeout(constants.WaitTaskTimeout)*time.Second,
-			constants.WaitTaskInterval)
+		err = providerInterface.WaitSubtask(
+			task, task.GetTimeout(constants.WaitTaskTimeout), constants.WaitTaskInterval)
 		if err != nil {
 			logger.Errorf("Failed to wait subtask [%s] in runtime [%s]: %+v",
 				task.TaskId, task.Target, err)
