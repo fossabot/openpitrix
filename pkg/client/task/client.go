@@ -52,7 +52,7 @@ func DescribeTasks(ctx context.Context, taskRequest *pb.DescribeTasksRequest) (*
 }
 
 func WaitTask(taskId string, timeout time.Duration, waitInterval time.Duration) error {
-	logger.Debug("Waiting for task [%s] finished", taskId)
+	logger.Debugf("Waiting for task [%s] finished", taskId)
 	return utils.WaitForSpecificOrError(func() (bool, error) {
 		taskRequest := &pb.DescribeTasksRequest{
 			TaskId: []string{taskId},
