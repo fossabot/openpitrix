@@ -14,6 +14,8 @@ import (
 	qcconfig "github.com/yunify/qingcloud-sdk-go/config"
 	qcservice "github.com/yunify/qingcloud-sdk-go/service"
 
+	"openpitrix.io/openpitrix/pkg/utils/jsontool"
+
 	runtimeclient "openpitrix.io/openpitrix/pkg/client/runtime"
 	"openpitrix.io/openpitrix/pkg/constants"
 	"openpitrix.io/openpitrix/pkg/logger"
@@ -85,22 +87,28 @@ func (p *ProviderHandler) RunInstances(task *models.Task) error {
 		return err
 	}
 
-	output, err := instanceService.RunInstances(
-		&qcservice.RunInstancesInput{
-			ImageID:       qcservice.String(instance.ImageId),
-			CPU:           qcservice.Int(instance.Cpu),
-			Memory:        qcservice.Int(instance.Memory),
-			InstanceName:  qcservice.String(instance.Name),
-			InstanceClass: qcservice.Int(DefaultInstanceClass),
-			Volumes:       qcservice.StringSlice([]string{instance.VolumeId}),
-			VxNets:        qcservice.StringSlice([]string{instance.Subnet}),
-			LoginMode:     qcservice.String(DefaultLoginMode),
-			LoginPasswd:   qcservice.String(DefaultLoginPassword),
-			UserdataValue: qcservice.String(instance.UserDataValue),
-			UserdataPath:  qcservice.String(instance.UserdataPath),
-			// GPU:     qcservice.Int(instance.Gpu),
-		},
-	)
+	input := &qcservice.RunInstancesInput{
+		ImageID:       qcservice.String(instance.ImageId),
+		CPU:           qcservice.Int(instance.Cpu),
+		Memory:        qcservice.Int(instance.Memory),
+		InstanceName:  qcservice.String(instance.Name),
+		InstanceClass: qcservice.Int(DefaultInstanceClass),
+		VxNets:        qcservice.StringSlice([]string{instance.Subnet}),
+		LoginMode:     qcservice.String(DefaultLoginMode),
+		LoginPasswd:   qcservice.String(DefaultLoginPassword),
+		// GPU:     qcservice.Int(instance.Gpu),
+	}
+	if instance.VolumeId != "" {
+		input.Volumes = qcservice.StringSlice([]string{instance.VolumeId})
+	}
+	if instance.UserdataPath != "" {
+		input.UserdataPath = qcservice.String(instance.UserdataPath)
+	}
+	if instance.UserDataValue != "" {
+		input.UserdataValue = qcservice.String(instance.UserDataValue)
+	}
+	logger.Debugf("RunInstances with input: %s", jsontool.ToString(input))
+	output, err := instanceService.RunInstances(input)
 	if err != nil {
 		logger.Errorf("Send RunInstances to %s failed: %v", MyProvider, err)
 		return err
