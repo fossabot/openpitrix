@@ -94,9 +94,11 @@ func (c *Controller) HandleTask(taskId string, cb func()) error {
 	})
 
 	task.Status = constants.StatusFailed
-	defer c.updateTaskAttributes(task.TaskId, map[string]interface{}{
-		"status": task.Status,
-	})
+	defer func(task *models.Task) {
+		c.updateTaskAttributes(task.TaskId, map[string]interface{}{
+			"status": task.Status,
+		})
+	}(task)
 
 	query := c.Db.
 		Select(models.TaskColumns...).

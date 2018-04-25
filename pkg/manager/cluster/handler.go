@@ -710,7 +710,7 @@ func (p *Server) DescribeClusterNodes(ctx context.Context, req *pb.DescribeClust
 	limit := utils.GetLimitFromRequest(req)
 
 	query := pi.Global().Db.
-		Select(models.ClusterColumns...).
+		Select(models.ClusterNodeColumns...).
 		From(models.ClusterNodeTableName).
 		Offset(offset).
 		Limit(limit).

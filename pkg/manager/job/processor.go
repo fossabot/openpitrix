@@ -151,6 +151,7 @@ func (j *Processor) Final() {
 		logger.Errorf("Executing job [%s] final processor failed: %+v", j.Job.JobId, err)
 		return
 	}
+	// TODO: modify cluster status to `active or deleted`
 	err = clusterclient.ModifyClusterTransitionStatus(ctx, client, j.Job.ClusterId, "")
 	if err != nil {
 		logger.Errorf("Executing job [%s] final processor failed: %+v", j.Job.JobId, err)
