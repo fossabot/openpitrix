@@ -301,3 +301,19 @@ func (p *Server) GetAppVersionPackage(ctx context.Context, req *pb.GetAppVersion
 		Package: content,
 	}, nil
 }
+
+func (p *Server) DescribeCategory(context.Context, *pb.DescribeCategoryRequest) (*pb.DescribeCategoryResponse, error) {
+	return nil, nil
+}
+
+func (p *Server) CreateCategory(context.Context, *pb.CreateCategoryRequest) (*pb.CreateCategoryResponse, error) {
+	return nil, nil
+}
+
+func (p *Server) ModifyCategory(context.Context, *pb.ModifyCategoryRequest) (*pb.ModifyCategoryResponse, error) {
+	return nil, nil
+}
+
+func (p *Server) DeleteCategory(context.Context, *pb.DeleteCategoryRequest) (*pb.DeleteCategoryResponse, error) {
+	return nil, nil
+}

@@ -65,6 +65,10 @@ type DescribeAppsParams struct {
 
 	/*AppID*/
 	AppID []string
+	/*CategoryID*/
+	CategoryID []string
+	/*CategoryName*/
+	CategoryName []string
 	/*ChartName*/
 	ChartName []string
 	/*Limit*/
@@ -129,6 +133,28 @@ func (o *DescribeAppsParams) WithAppID(appID []string) *DescribeAppsParams {
 // SetAppID adds the appId to the describe apps params
 func (o *DescribeAppsParams) SetAppID(appID []string) {
 	o.AppID = appID
+}
+
+// WithCategoryID adds the categoryID to the describe apps params
+func (o *DescribeAppsParams) WithCategoryID(categoryID []string) *DescribeAppsParams {
+	o.SetCategoryID(categoryID)
+	return o
+}
+
+// SetCategoryID adds the categoryId to the describe apps params
+func (o *DescribeAppsParams) SetCategoryID(categoryID []string) {
+	o.CategoryID = categoryID
+}
+
+// WithCategoryName adds the categoryName to the describe apps params
+func (o *DescribeAppsParams) WithCategoryName(categoryName []string) *DescribeAppsParams {
+	o.SetCategoryName(categoryName)
+	return o
+}
+
+// SetCategoryName adds the categoryName to the describe apps params
+func (o *DescribeAppsParams) SetCategoryName(categoryName []string) {
+	o.CategoryName = categoryName
 }
 
 // WithChartName adds the chartName to the describe apps params
@@ -232,6 +258,22 @@ func (o *DescribeAppsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 	joinedAppID := swag.JoinByFormat(valuesAppID, "multi")
 	// query array param app_id
 	if err := r.SetQueryParam("app_id", joinedAppID...); err != nil {
+		return err
+	}
+
+	valuesCategoryID := o.CategoryID
+
+	joinedCategoryID := swag.JoinByFormat(valuesCategoryID, "multi")
+	// query array param category_id
+	if err := r.SetQueryParam("category_id", joinedCategoryID...); err != nil {
+		return err
+	}
+
+	valuesCategoryName := o.CategoryName
+
+	joinedCategoryName := swag.JoinByFormat(valuesCategoryName, "multi")
+	// query array param category_name
+	if err := r.SetQueryParam("category_name", joinedCategoryName...); err != nil {
 		return err
 	}
 

@@ -23,6 +23,8 @@ It has these top-level messages:
 	DeleteAppRequest
 	DeleteAppResponse
 	App
+	AppCategory
+	Category
 	DescribeAppsRequest
 	DescribeAppsResponse
 	CreateAppVersionRequest
@@ -36,6 +38,14 @@ It has these top-level messages:
 	DescribeAppVersionsResponse
 	GetAppVersionPackageRequest
 	GetAppVersionPackageResponse
+	DescribeCategoryRequest
+	DescribeCategoryResponse
+	CreateCategoryRequest
+	CreateCategoryResponse
+	ModifyCategoryRequest
+	ModifyCategoryResponse
+	DeleteCategoryRequest
+	DeleteCategoryResponse
 	CreateClusterRequest
 	CreateClusterResponse
 	ModifyClusterRequest
